@@ -136,9 +136,9 @@ if (document.getElementById("quiz")) {
         // feedback
         if (opEscolhida == q.resposta) {
             pontos++;
-            feedback.innerHTML = "💖 Acertou!";
+            feedback.innerHTML = "Acertou!";
         } else {
-            feedback.innerHTML = `😢 Errou! Resposta certa: ${q.resposta}`;
+            feedback.innerHTML = `Errou! Resposta certa: ${q.resposta}`;
         }
 
         // delay de 7 segundos
