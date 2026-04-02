@@ -56,48 +56,108 @@ if (document.getElementById("quiz")) {
             opcoes: ["33234", "23453", "29053", dados.midias]
         },
         {
+            pergunta: `O que mandamos mais?`,
+            resposta: "amor",
+            opcoes: ["amor", "meu bem", "eu te amo"]
+        },
+        {
             pergunta: `Quantos "amor" enviamos?`,
             resposta: dados.palavras.amor,
-            opcoes: ["23267", "19332", "16345", dados.palavras.amor]
+            opcoes: [dados.palavras.amor, "23267", "19332", "16345"]
         },
         {
-            pergunta: `Quantoss "eu te amo" mandamos? xxxx`,
-            resposta: dados.palavras.amor,
-            opcoes: ["23267", "19332", "16345", dados.palavras.amor]
+            pergunta: `Quantos "eu te amo" mandamos?`,
+            resposta: dados.palavras.euTeAmo,
+            opcoes: ["1100", dados.palavras.euTeAmo, "2340", "1203"]
         },
         {
-            pergunta: "Quantos dias diferentes nós nos falamos? xxxx",
-            resposta: "334",
-            opcoes: ["405", "324", "334"]
+            pergunta: `O que mandamos mais?`,
+            resposta: "abimon",
+            opcoes: ["little couto", "filhos", "abimon"]
         },
+        {
+            pergunta: `Quantos "abimon" enviamos?`,
+            resposta: dados.palavras.abimon,
+            opcoes: ["142", dados.palavras.abimon, "220", "340"]
+        },
+        {
+            pergunta: `Quantos "little couto" enviamos?`,
+            resposta: dados.palavras.littleCouto,
+            opcoes: [dados.palavras.littleCouto, "142", "220", "340"]
+        },
+        {
+            pergunta: `O que mandamos mais?`,
+            resposta: "lindo",
+            opcoes: ["lindia", "linda", "lindo", "lindio"]
+        },
+        {
+            pergunta: `O que mandamos mais?`,
+            resposta: "lindo",
+            opcoes: ["trans", "aceitar"]
+        }
     ];
 
     function mostrarPergunta() {
         const q = perguntas[indice];
+
         document.getElementById("quiz").innerHTML = `
             <h2>${q.pergunta}</h2>
+            <div id="feedback" style="margin:10px;font-weight:bold;"></div>
             ${q.opcoes.map(op =>
                 `<button class="bQuiz" onclick="responder('${op}')">${op}</button>`
             ).join("")}
         `;
     }
 
-    window.responder = function(op) {
-        if (op === perguntas[indice].resposta) pontos++;
+    window.responder = function(opEscolhida) {
+        const q = perguntas[indice];
+        const botoes = document.querySelectorAll(".bQuiz");
+        const feedback = document.getElementById("feedback");
 
-        indice++;
+        // trava botões
+        botoes.forEach(btn => btn.disabled = true);
 
-        if (indice < perguntas.length) {
-            mostrarPergunta();
+        botoes.forEach(btn => {
+            const texto = btn.innerText;
+
+            // correta → verde
+            if (texto == q.resposta) {
+                btn.style.backgroundColor = "#4CAF50";
+                btn.style.color = "white";
+            }
+
+            // errada escolhida → vermelho
+            if (texto == opEscolhida && texto != q.resposta) {
+                btn.style.backgroundColor = "#f44336";
+                btn.style.color = "white";
+            }
+        });
+
+        // feedback
+        if (opEscolhida == q.resposta) {
+            pontos++;
+            feedback.innerHTML = "💖 Acertou!";
         } else {
-            document.getElementById("quiz").innerHTML =
-                `<h2>Resultado: ${pontos}</h2>`;
+            feedback.innerHTML = `😢 Errou! Resposta certa: ${q.resposta}`;
         }
+
+        // delay de 7 segundos
+        setTimeout(() => {
+            indice++;
+
+            if (indice < perguntas.length) {
+                mostrarPergunta();
+            } else {
+                document.getElementById("quiz").innerHTML = `
+                    <h2>Resultado final 💖</h2>
+                    <p>${pontos} / ${perguntas.length}</p>
+                `;
+            }
+        }, 2000);
     }
 
     mostrarPergunta();
 }
-
 
 //Começo da lógia da busca
 

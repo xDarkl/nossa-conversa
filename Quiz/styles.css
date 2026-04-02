@@ -27,12 +27,17 @@ button {
     border-radius: 12px;
     border: none;
     cursor: pointer;
-    color: white;
+
+    border: 2px solid white; 
 
     justify-content: center;
      align-items: center; 
      color: #d7736f;
+    background-color: white;
+}
 
+button:hover{
+    border-color: #d7736f;
 }
 
 .titulo{
