@@ -6,8 +6,8 @@ if (document.getElementById("stats")) {
     div.innerHTML = `
         <h2> Número de Mensagens </h2>
         <p>Total: ${dados.totalMensagens}</p>
-        <p>Você: ${dados.porPessoa["Couto"]}</p>
-        <p>Ela: ${dados.porPessoa["Abi"]}</p>
+        <p>Couto: ${dados.porPessoa["Couto"]}</p>
+        <p>Abi: ${dados.porPessoa["Abi"]}</p>
 
         <h2>Tempo e Conteúdo das Mensagens</h2>
         <p>Hora mais ativa: ${dados.horaMaisAtiva}h</p>
@@ -92,7 +92,7 @@ if (document.getElementById("quiz")) {
         },
         {
             pergunta: `O que mandamos mais?`,
-            resposta: "lindo",
+            resposta: "aceitar",
             opcoes: ["trans", "aceitar"]
         }
     ];
